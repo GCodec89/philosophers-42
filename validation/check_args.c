@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:19:23 by gonolive          #+#    #+#             */
-/*   Updated: 2024/11/19 18:16:12 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:01:15 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ int	check_is_digit(char *argv[])
 	int	j;
 
 	i = 1;
-	j = 0;
 	while (argv[i])
 	{
+		j = 0;
+		if (argv[i][j] == '-')
+			return (printf(NO_NEGATIVE), 1);
+		if (argv[i][j] == '+')
+			j++;
 		while (argv[i][j])
 		{
 			if (argv[i][j] > 57 || argv[i][j] < 48)
@@ -45,7 +49,6 @@ int	check_is_digit(char *argv[])
 			}
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	return (0);
