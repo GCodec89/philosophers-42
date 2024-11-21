@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 16:05:49 by gonolive          #+#    #+#             */
-/*   Updated: 2024/11/21 16:37:50 by gonolive         ###   ########.fr       */
+/*   Created: 2024/11/21 16:32:29 by gonolive          #+#    #+#             */
+/*   Updated: 2024/11/21 16:41:32 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	main(int argc, char *argv[])
+int	ft_atoi(const char *str)
 {
-	t_table	*table;
+	int	i;
+	int	sign;
+	int	res;
 
-	table = NULL;
-	check_args (argc, argv);
-	table = init_table(argc, argv);
-	(void)table;
-	return (0);
+	i = 0;
+	sign = 1;
+	res = 0;
+	while (str[i] == 32 || (str[i] > 8 && str[i] < 14))
+	{
+		i++;
+	}
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+		{
+			sign = sign * -1;
+		}
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (sign * res);
 }

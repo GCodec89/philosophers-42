@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:06:02 by gonolive          #+#    #+#             */
-/*   Updated: 2024/11/19 19:01:30 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:33:28 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@
 
 # define NO_NEGATIVE "Error.\nNo negative energies.\n"
 
+# define MALLOC_ERROR "Error.\nCould not allocate memory.\n"
+
+typedef struct s_philo
+{
+	unsigned int	id;
+}	t_philo;
+
+typedef struct s_table
+{
+	unsigned int	n_philos;
+	time_t			time_die;
+	time_t			time_eat;
+	time_t			time_sleep;
+	int				must_eat;
+	t_philo			**philos;
+}	t_table;
+
+t_table	*init_table(int argc, char *argv[]);
+
+int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
 
 int		check_int_max(char *argv[]);

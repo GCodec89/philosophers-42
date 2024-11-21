@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 16:05:49 by gonolive          #+#    #+#             */
-/*   Updated: 2024/11/21 16:37:50 by gonolive         ###   ########.fr       */
+/*   Created: 2024/11/21 07:42:30 by gonolive          #+#    #+#             */
+/*   Updated: 2024/11/21 16:54:09 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	main(int argc, char *argv[])
+t_table	*init_table(int argc, char *argv[])
 {
 	t_table	*table;
 
-	table = NULL;
-	check_args (argc, argv);
-	table = init_table(argc, argv);
-	(void)table;
-	return (0);
+	table = malloc(sizeof(t_table) * 1);
+	if (!table)
+	{
+		return (printf(MALLOC_ERROR), NULL);
+	}
+	table->n_philos = ft_atoi(argv[1]);
+	table->time_die = ft_atoi(argv[2]);
+	table->time_eat = ft_atoi(argv[3]);
+	table->time_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+	{
+		table->must_eat = ft_atoi(argv[5]);
+	}
+	return (table);
 }
