@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:06:02 by gonolive          #+#    #+#             */
-/*   Updated: 2024/11/21 16:33:28 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:52:53 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,18 @@
 
 # define MALLOC_ERROR "Error.\nCould not allocate memory.\n"
 
+# define MUTEX_ERROR "Error.\nCould not create mutex.\n"
+
+# define TABLE_ERROR "Error.\nCould not create table.\n"
+
+typedef struct s_table	t_table;
 typedef struct s_philo
 {
 	unsigned int	id;
+	pthread_mutex_t	meal_time_lock;
+	t_table			*table;
+	unsigned int	times_ate;
+	unsigned int	fork[2];
 }	t_philo;
 
 typedef struct s_table
