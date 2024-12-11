@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:06:02 by gonolive          #+#    #+#             */
-/*   Updated: 2024/12/09 17:52:53 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:54:39 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,15 @@
 
 # define WRONG_ARGS "Error. Must use:\nPlease enter: ./philo <no. of philos> \
 <time_to_die> <time_to_eat> <time_to_sleep> <max_meals> (optional)\n"
-
 # define DIGIT_ONLY "Error.\nAll arguments must be digits only.\n"
-
 # define BIG_NUMBER "Error.\nAll arguments must be less than 2147483647.\n"
-
 # define NO_NEGATIVE "Error.\nNo negative energies.\n"
-
 # define MALLOC_ERROR "Error.\nCould not allocate memory.\n"
-
 # define MUTEX_ERROR "Error.\nCould not create mutex.\n"
-
 # define TABLE_ERROR "Error.\nCould not create table.\n"
 
 typedef struct s_table	t_table;
+
 typedef struct s_philo
 {
 	unsigned int	id;
@@ -54,6 +49,7 @@ typedef struct s_table
 	time_t			time_sleep;
 	int				must_eat;
 	t_philo			**philos;
+	pthread_mutex_t	*fork_locks;
 }	t_table;
 
 t_table	*init_table(int argc, char *argv[]);
@@ -64,5 +60,9 @@ long	ft_atol(const char *str);
 int		check_int_max(char *argv[]);
 int		check_is_digit(char *argv[]);
 int		check_args(int argc, char *argv[]);
+
+void	*free_table(t_table *table);
+void	*error_null(t_table *table);
+void	free_philos(t_philo **philos, int i);
 
 #endif

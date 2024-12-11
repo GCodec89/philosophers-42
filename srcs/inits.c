@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 07:42:30 by gonolive          #+#    #+#             */
-/*   Updated: 2024/12/09 17:58:17 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:02:05 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,9 @@ static t_philo	**init_philos(t_table *table)
 	{
 		philos[i] = malloc(sizeof(t_philo) * 1);
 		if (!philos[i])
-		{
-			return (printf(MALLOC_ERROR), NULL);
-		}
+			return (free_philos(philos, i), NULL);
 		if (pthread_mutex_init(&philos[i]->meal_time_lock, 0) != 0)
-		{
-			return (printf(MUTEX_ERROR), NULL);
-		}
+			return (free_philos(philos, i), NULL);
 		philos[i]->table = table;
 		philos[i]->id = i;
 		philos[i]->times_ate = 0;
@@ -70,5 +66,9 @@ t_table	*init_table(int argc, char *argv[])
 		table->must_eat = ft_atoi(argv[5]);
 	}
 	table->philos = init_philos(table);
+	if (!table->philos)
+		return (NULL);
+	/*if (!init_global_mutexes(table))
+		return (NULL);*/
 	return (table);
 }
