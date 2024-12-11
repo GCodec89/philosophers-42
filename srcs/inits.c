@@ -6,11 +6,29 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 07:42:30 by gonolive          #+#    #+#             */
-/*   Updated: 2024/12/11 10:54:37 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:56:29 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+static pthread_mutex_t	*init_forks(t_table *table)
+{
+	pthread_mutex_t	*forks;
+	unsigned int	i;
+
+	forks = malloc(sizeof(pthread_mutex_t) * table->n_philos);
+	if (!forks)
+		return (free_table(table));
+	i = 0;
+	while (i < table->n_philos)
+	{
+		if (pthread_mutex_init(&forks[i], 0) != 0)
+			return (free_table(table));
+		i++;
+	}
+	return (forks);
+}
 
 static void	assign_forks(t_philo *philo)
 {
@@ -48,6 +66,26 @@ static t_philo	**init_philos(t_table *table)
 	return (philos);
 }
 
+static void	init_global_mutexes(t_table *table)
+{
+	table->fork_locks = init_forks(table);
+	if (!table->fork_locks)
+	{
+		free_table(table);
+		return ;
+	}
+	if (pthread_mutex_init(&table->sim_stop_lock, 0) != 0)
+	{
+		free_table(table);
+		return ;
+	}
+	if (pthread_mutex_init(&table->write_lock, 0) != 0)
+	{
+		free_table(table);
+		return ;
+	}
+}
+
 t_table	*init_table(int argc, char *argv[])
 {
 	t_table	*table;
@@ -68,5 +106,7 @@ t_table	*init_table(int argc, char *argv[])
 	table->philos = init_philos(table);
 	if (!table->philos)
 		return (free_table(table), NULL);
+	init_global_mutexes(table);
+	table->sim_stop = false;
 	return (table);
 }

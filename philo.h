@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:06:02 by gonolive          #+#    #+#             */
-/*   Updated: 2024/12/11 11:11:06 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:56:17 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
+# include <stdbool.h>
 
 # define WRONG_ARGS "Error. Must use:\nPlease enter: ./philo <no. of philos> \
 <time_to_die> <time_to_eat> <time_to_sleep> <max_meals> (optional)\n"
@@ -50,6 +51,9 @@ typedef struct s_table
 	int				must_eat;
 	t_philo			**philos;
 	pthread_mutex_t	*fork_locks;
+	pthread_mutex_t	write_lock;
+	pthread_mutex_t	sim_stop_lock;
+	bool			sim_stop;
 }	t_table;
 
 t_table	*init_table(int argc, char *argv[]);

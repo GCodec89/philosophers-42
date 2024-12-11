@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:29:13 by gonolive          #+#    #+#             */
-/*   Updated: 2024/12/11 11:11:01 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:43:59 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void	*error_null(t_table *table)
 		free_table(table);
 	return (NULL);
 }
-
