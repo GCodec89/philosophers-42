@@ -6,7 +6,7 @@
 /*   By: gonolive <gonolive@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:06:02 by gonolive          #+#    #+#             */
-/*   Updated: 2024/12/09 18:54:39 by gonolive         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:11:06 by gonolive         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ int		check_args(int argc, char *argv[]);
 
 void	*free_table(t_table *table);
 void	*error_null(t_table *table);
-void	free_philos(t_philo **philos, int i);
 
 #endif
